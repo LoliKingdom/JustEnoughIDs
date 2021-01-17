@@ -24,7 +24,7 @@ repositories {
     maven { url = "https://minecraft.curseforge.com/api/maven" }
     maven { url "http://maven.tterrag.com" }
     maven { url "https://maven.blamejared.com" }
-    maven { url "https://maven.mcmoddev.com/" }
+    // maven { url "https://maven.mcmoddev.com/" }
     maven { url "http://repo.spongepowered.org/maven" }
     maven { url "https://maven.blamejared.com" }
     maven { url "http://maven.tterrag.com" }
@@ -54,6 +54,7 @@ repositories {
 }
 
 dependencies {
+    compile files("./libs/mixinbooter-1.0.jar")
     implementation("org.spongepowered:mixin:0.8") {
         exclude module: "asm-commons"
         exclude module: "asm-tree"

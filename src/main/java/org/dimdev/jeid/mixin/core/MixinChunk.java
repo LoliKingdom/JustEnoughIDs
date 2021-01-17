@@ -18,7 +18,6 @@ import java.util.Arrays;
 @Mixin(Chunk.class)
 public class MixinChunk implements INewChunk {
 
-
     @Shadow @Final private World world;
 
     private static final byte errorBiomeID = (byte) Biome.REGISTRY.getIDForObject(JEID.errorBiome);

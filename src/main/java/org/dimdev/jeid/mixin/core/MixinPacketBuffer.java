@@ -6,11 +6,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
@@ -37,19 +36,22 @@ public abstract class MixinPacketBuffer {
         return this.writeVarInt(p_writeShort_1_);
     }
 
-
-    @Inject(method = "readItemStack", at = @At(value = "HEAD"), cancellable = true)
-    private void readIntItemId(CallbackInfoReturnable<ItemStack> cir) throws IOException {
+    /**
+     * @author Rongmario
+     * @reason Fuck injects.
+     */
+    @Overwrite
+    public ItemStack readItemStack() throws IOException {
         int i = this.readVarInt();
-
         if (i < 0) {
-            cir.setReturnValue(ItemStack.EMPTY);
+            return ItemStack.EMPTY;
         } else {
             int j = this.readByte();
             int k = this.readShort();
             ItemStack itemstack = new ItemStack(Item.getItemById(i), j, k);
             itemstack.getItem().readNBTShareTag(itemstack, this.readCompoundTag());
-            cir.setReturnValue(itemstack);
+            return itemstack;
         }
     }
+
 }

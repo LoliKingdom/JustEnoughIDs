@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.GameData;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.dimdev.jeid.network.MessageManager;
 
@@ -27,13 +28,13 @@ import java.util.Random;
      name = "JustEnoughIDs",
      updateJSON = "https://gist.githubusercontent.com/Runemoro/67b1d8d31af58e9d35410ef60b2017c3/raw/1fe08a6c45a1f481a8a2a8c71e52d4245dcb7713/jeid_update.json")
 public class JEID {
+
     private static final boolean DEBUG_BLOCK_IDS = false;
     private static final boolean DEBUG_ITEM_IDS = false;
     private static final boolean DEBUG_BIOME_IDS = false;
     private static final boolean DEBUG_POTION_IDS = false;
     private static final boolean DEBUG_ENCHANT_IDS = false;
-    public static final Biome errorBiome = new BiomeVoid(new Biome.BiomeProperties("A mod doesn't support extended biome IDs -- report to JEID"))
-            .setRegistryName("jeid:error_biome");
+    public static final Biome errorBiome = new BiomeVoid(new Biome.BiomeProperties("A mod doesn't support extended biome IDs -- report to JEID")).setRegistryName("jeid:error_biome");
 
 
     @Mod.EventHandler
@@ -110,7 +111,7 @@ public class JEID {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent e) {
-        JEIDTransformer.REGISTRY = net.minecraftforge.registries.GameData.getWrapper(Potion.class);
+        JEIDTransformer.REGISTRY = GameData.getWrapper(Potion.class);
     }
 
     public static class PotionTest extends Potion {
