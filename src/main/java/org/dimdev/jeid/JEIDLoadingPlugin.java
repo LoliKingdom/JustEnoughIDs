@@ -18,8 +18,6 @@ public class JEIDLoadingPlugin implements IFMLLoadingPlugin {
         MixinBootstrap.init();
         Utils.LOGGER.info("Initializing JustEnoughIDs core mixins");
         Mixins.addConfiguration("mixins.jeid.core.json");
-        Utils.LOGGER.info("Initializing JustEnoughIDs initialization mixins");
-        Mixins.addConfiguration("mixins.jeid.init.json");
     }
 
     @Override public String[] getASMTransformerClass() { Obf.loadData(); return new String[]{ "org.dimdev.jeid.JEIDTransformer" }; }
